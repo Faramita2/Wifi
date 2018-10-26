@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Wifi</string>
+    <string name="wifi_name_hint">Enter a name</string>
+    <string name="wifi_password_hint">Enter your password</string>
+    <string name="wifi_ip_hint">Enter your ip</string>
+    <string name="wifi_port_hint">Enter your port</string>
+    <string name="save_text">Save</string>
+</resources>
