@@ -16,7 +16,8 @@
         android:id="@+id/wifi_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/wifi_password_hint" />
+        android:hint="@string/wifi_password_hint"
+        android:inputType="textVisiblePassword"/>
     <EditText
         android:id="@+id/wifi_ip"
         android:layout_width="match_parent"
