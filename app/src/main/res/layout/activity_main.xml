@@ -1,75 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/wifi_name"
-        android:padding="16dp"
-        android:layout_width="match_parent"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/wifi_name_hint"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/wifi_password"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/wifi_password_hint"
-        android:inputType="textVisiblePassword" />
-    <EditText
-        android:id="@+id/wifi_ip"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/wifi_ip_hint"/>
-
-    <EditText
-        android:id="@+id/wifi_port"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/wifi_port_hint" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/wifi_save_button"
+        android:id="@+id/connect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save_text"
-        android:layout_weight="1"
-        android:onClick="onClickSave"/>
-    <Button
-        android:id="@+id/wifi_setProxy_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/set_text"
-        android:layout_weight="1"
-        android:onClick="onClickSetProxy" />
-    <Button
-        android:id="@+id/wifi_unsetProxy_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/unset_text"
-        android:layout_weight="1"
-        android:onClick="onClickUnsetProxy"/>
-    <Button
-        android:id="@+id/wifi_connect_button"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClickConnect"
         android:text="@string/connect_text"
-        android:onClick="onClickConnect"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.501" />
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="onClickEdit"
+        android:src="@android:drawable/ic_menu_edit"
+        app:backgroundTint="@android:color/holo_red_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:onClick="onClickSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/set_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
