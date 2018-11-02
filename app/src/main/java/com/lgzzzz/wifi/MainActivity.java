@@ -49,44 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
     // connect wifi
     public void onClickConnect(View view) {
-        // Check wifi if is enabled
-        if (manager == null)
-            return;
-        if (!manager.isWifiEnabled()) {
-            manager.setWifiEnabled(true);
-        }
-
-        connectWithoutProxy();
-        new ShowCurrentIpTask().execute();
-
-    }
-
-    public void onClickSet(View view) {
-        reconnectWithProxy();
-        new ShowCurrentIpTask().execute();
-    }
-
-
-    private void reconnectWithProxy() {
-        ProxyManager proxyManager = new ProxyManager(manager);
-        String ipText = (String) configs.get("ip");
-        String portText = (String) configs.get("port");
-        proxyManager.setWifiProxySettings(ipText, portText);
-    }
-
-    private void connectWithoutProxy() {
-
         String ssidText = (String) configs.get("ssid");
         String passwordText = (String) configs.get("password");
 
-        WifiConfiguration conf = new WifiConfiguration();
-        conf.SSID = "\"" + ssidText + "\"";
-        conf.preSharedKey = "\"" + passwordText + "\"";
-
-        // find if a same wifi exists
-        // remove it
-
-        isExists(conf);
+        // get config
+        WifiConfiguration conf = Configuration.config(manager, ssidText, passwordText);
 
         int netId = manager.addNetwork(conf);
         manager.disconnect();
@@ -97,23 +64,28 @@ public class MainActivity extends AppCompatActivity {
         if (manager.getWifiState() == WifiManager.WIFI_STATE_ENABLED)
             Toast.makeText(this, R.string.connect_successfully, Toast.LENGTH_SHORT).show();
 
-    }
-
-
-    private void isExists(WifiConfiguration conf) {
-        for (WifiConfiguration c : manager.getConfiguredNetworks())
-            if (conf.SSID.equals(c.SSID))
-                manager.removeNetwork(c.networkId);
+        new ShowCurrentIpTask().execute();
 
     }
 
+    public void onClickSet(View view) {
+        ProxyManager proxyManager = new ProxyManager(manager);
+        String ipText = (String) configs.get("ip");
+        String portText = (String) configs.get("port");
+        proxyManager.setWifiProxySettings(ipText, portText);
+        new ShowCurrentIpTask().execute();
+    }
 
+
+
+
+    // Edit configuration
     public void onClickEdit(View view) {
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
 
-
+    // Check ip
     private class ShowCurrentIpTask extends AsyncTask<Void, Integer, String> {
         protected String doInBackground(Void... voids) {
             String ip = null;
