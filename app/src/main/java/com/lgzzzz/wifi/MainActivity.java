@@ -7,13 +7,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.Map;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // connect wifi
+    // Connect wifi
     public void onClickConnect(View view) {
         String ssidText = (String) configs.get("ssid");
         String passwordText = (String) configs.get("password");
@@ -64,20 +64,18 @@ public class MainActivity extends AppCompatActivity {
         if (manager.getWifiState() == WifiManager.WIFI_STATE_ENABLED)
             Toast.makeText(this, R.string.connect_successfully, Toast.LENGTH_SHORT).show();
 
-        new ShowCurrentIpTask().execute();
+        new ShowCurrentIpTask(this).execute();
 
     }
 
+    // Set proxy
     public void onClickSet(View view) {
         ProxyManager proxyManager = new ProxyManager(manager);
         String ipText = (String) configs.get("ip");
         String portText = (String) configs.get("port");
         proxyManager.setWifiProxySettings(ipText, portText);
-        new ShowCurrentIpTask().execute();
+        new ShowCurrentIpTask(this).execute();
     }
-
-
-
 
     // Edit configuration
     public void onClickEdit(View view) {
@@ -86,7 +84,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Check ip
-    private class ShowCurrentIpTask extends AsyncTask<Void, Integer, String> {
+    private static class ShowCurrentIpTask extends AsyncTask<Void, Integer, String> {
+
+        private final WeakReference<MainActivity> mainActivityWeakReference;
+
+        ShowCurrentIpTask(MainActivity activity) {
+            mainActivityWeakReference = new WeakReference<>(activity);
+        }
         protected String doInBackground(Void... voids) {
             String ip = null;
                 try {
@@ -105,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         protected void onPostExecute(String result) {
-            Toast.makeText(MainActivity.this, "Now ip: " + result, Toast.LENGTH_SHORT).show();;
+            Toast.makeText(mainActivityWeakReference.get(), "Now ip: " + result, Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
