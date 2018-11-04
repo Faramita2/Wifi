@@ -3,7 +3,6 @@ package com.lgzzzz.wifi;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,18 +10,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
-import java.net.URL;
 import java.util.Map;
 
-import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
-
     private static final String WIFI_SETTINGS = "WIFI SETTINGS";
-    private static final String CHECK_IP = "http://checkip.amazonaws.com";
 
     private WifiManager manager;
 
@@ -83,35 +75,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Check ip
-    private static class ShowCurrentIpTask extends AsyncTask<Void, Integer, String> {
-
-        private final WeakReference<MainActivity> mainActivityWeakReference;
-
-        ShowCurrentIpTask(MainActivity activity) {
-            mainActivityWeakReference = new WeakReference<>(activity);
-        }
-        protected String doInBackground(Void... voids) {
-            String ip = null;
-                try {
-                    sleep(10000);
-                    URL url = new URL(CHECK_IP);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-                    ip = reader.readLine();
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-
-            return ip;
-        }
-
-
-
-        protected void onPostExecute(String result) {
-            Toast.makeText(mainActivityWeakReference.get(), "Now ip: " + result, Toast.LENGTH_SHORT)
-                    .show();
-        }
-    }
 
 }
