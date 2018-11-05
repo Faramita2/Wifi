@@ -38,6 +38,8 @@ public  class ShowCurrentIpTask extends AsyncTask<Void, Integer, String> {
     }
 
     protected void onPostExecute(String result) {
+        if (mainActivityWeakReference.get() == null)
+            return;
         TextView connectLog = mainActivityWeakReference.get().findViewById(R.id
                 .log_text);
 
