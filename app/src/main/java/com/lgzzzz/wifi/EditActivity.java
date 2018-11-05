@@ -85,8 +85,9 @@ public class EditActivity extends AppCompatActivity {
                 // need check the input information then back to MainActivity
                 // TODO: check info and save
                 saveConfiguration();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                super.onBackPressed();
+//                Intent intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
                 return true;
                 default:
                     return super.onOptionsItemSelected(item);

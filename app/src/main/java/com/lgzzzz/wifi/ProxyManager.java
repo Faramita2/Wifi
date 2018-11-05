@@ -2,7 +2,6 @@ package com.lgzzzz.wifi;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.widget.Toast;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
