@@ -15,7 +15,7 @@ import java.util.Map;
 public class EditActivity extends AppCompatActivity {
 
     // SETTING
-    private static final String WIFI_SETTINGS = "WIFI SETTINGS";
+    private static final String WIFI_SETTINGS = "WIFI_SETTINGS";
 
     // TextViews
     private EditText ssid;

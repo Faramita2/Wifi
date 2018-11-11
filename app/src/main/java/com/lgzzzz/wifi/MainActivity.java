@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String WIFI_SETTINGS = "WIFI SETTINGS";
+    private static final String WIFI_SETTINGS = "SETTINGS";
 
     private WifiManager manager;
 
